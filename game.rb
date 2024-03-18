@@ -16,7 +16,7 @@ end
 
 # Main
 class GameWindow < Gosu::Window
-  attr_accessor :score
+  attr_accessor :score, :survived_waves
 
   def initialize
     super 640, 480
@@ -28,7 +28,8 @@ class GameWindow < Gosu::Window
     @paused = false
     @font = Gosu::Font.new(20)
     @state = :title
-    @score = 0
+    @score = 480
+    @survived_waves = 0
     @boss = nil
     @boss_spawn_threshold = 500
     @explosion_sound = Gosu::Sample.new("assets/sounds/effects/explosion.mp3")
@@ -125,6 +126,10 @@ class GameWindow < Gosu::Window
       score_text = "Score: #{@score}"
       text_width = @font.text_width(score_text)
       @font.draw_text(score_text, self.width - text_width - 10, 10, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
+
+      survived_waves_text = "Survived waves: #{@survived_waves}"
+      text_width = @font.text_width(survived_waves_text)
+      @font.draw_text(survived_waves_text, self.width - text_width - 10, 30, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
     end
   end
 

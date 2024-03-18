@@ -80,5 +80,6 @@ class Boss < Enemy
   def handle_defeat
     @window.score += 500
     @defeated = true
+    @window.survived_waves += 1
   end
 end
