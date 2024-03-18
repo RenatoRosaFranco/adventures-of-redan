@@ -35,8 +35,28 @@ class GameWindow < Gosu::Window
   end
 end
 
+# Enemy Class
+class Enemy < Object
+  attr_reader :x, :y
+
+  def initialize(window)
+    @image = Gosu::Image.new(window, "", false)
+    @x = rand(window.width - @image.width)
+    @y = -@image.height
+    @speed = rand(3..6)
+  end
+
+  def draw
+    @image.draw(@x, @y, 1)
+  end
+
+  def move_down
+    @y += @speed
+  end
+end
+
 # Player Class
-class Player
+class Player < Object
   attr_reader :x, :y
   attr_accessor :speed
 
