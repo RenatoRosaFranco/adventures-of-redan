@@ -1,0 +1,167 @@
+"pkg-config --exists gl"
+| pkg-config --libs gl
+=> "-lGL\n"
+"x86_64-linux-gnu-gcc -o conftest -I/usr/include/x86_64-linux-gnu/ruby-3.0.0 -I/usr/include/ruby-3.0.0/ruby/backward -I/usr/include/ruby-3.0.0 -I. -I../../include -I../../dependencies/stb -I../../dependencies/utf8proc -I../../dependencies/SDL_sound -I../../dependencies/mojoAL/AL -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -ffile-prefix-map=/build/ruby3.0-ohOwi0/ruby3.0-3.0.2=. -fstack-protector-strong -Wformat -Werror=format-security -fPIC -DGOSU_DEPRECATED= -DNDEBUG conftest.c  -L. -L/usr/lib/x86_64-linux-gnu -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic     -lruby-3.0  -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+"x86_64-linux-gnu-gcc -o conftest -I/usr/include/x86_64-linux-gnu/ruby-3.0.0 -I/usr/include/ruby-3.0.0/ruby/backward -I/usr/include/ruby-3.0.0 -I. -I../../include -I../../dependencies/stb -I../../dependencies/utf8proc -I../../dependencies/SDL_sound -I../../dependencies/mojoAL/AL -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -ffile-prefix-map=/build/ruby3.0-ohOwi0/ruby3.0-3.0.2=. -fstack-protector-strong -Wformat -Werror=format-security -fPIC -DGOSU_DEPRECATED= -DNDEBUG conftest.c  -L. -L/usr/lib/x86_64-linux-gnu -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic     -lruby-3.0 -lGL -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+| pkg-config --cflags-only-I gl
+=> "\n"
+| pkg-config --cflags-only-other gl
+=> "\n"
+| pkg-config --libs-only-l gl
+=> "-lGL\n"
+package configuration for gl
+incflags: 
+cflags: 
+ldflags: 
+libs: -lGL
+
+"pkg-config --exists sdl2"
+| pkg-config --libs sdl2
+=> "-lSDL2\n"
+"x86_64-linux-gnu-gcc -o conftest -I/usr/include/x86_64-linux-gnu/ruby-3.0.0 -I/usr/include/ruby-3.0.0/ruby/backward -I/usr/include/ruby-3.0.0 -I. -I../../include -I../../dependencies/stb -I../../dependencies/utf8proc -I../../dependencies/SDL_sound -I../../dependencies/mojoAL/AL  -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -ffile-prefix-map=/build/ruby3.0-ohOwi0/ruby3.0-3.0.2=. -fstack-protector-strong -Wformat -Werror=format-security -fPIC -DGOSU_DEPRECATED= -DNDEBUG  conftest.c  -L. -L/usr/lib/x86_64-linux-gnu -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic      -lGL -lruby-3.0 -lSDL2 -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+| pkg-config --cflags-only-I sdl2
+=> "-I/usr/include/SDL2\n"
+| pkg-config --cflags-only-other sdl2
+=> "-D_REENTRANT\n"
+| pkg-config --libs-only-l sdl2
+=> "-lSDL2\n"
+package configuration for sdl2
+incflags: -I/usr/include/SDL2
+cflags: -D_REENTRANT
+ldflags: 
+libs: -lSDL2
+
+"pkg-config --exists vorbisfile"
+| pkg-config --libs vorbisfile
+=> "-lvorbisfile\n"
+"x86_64-linux-gnu-gcc -o conftest -I/usr/include/x86_64-linux-gnu/ruby-3.0.0 -I/usr/include/ruby-3.0.0/ruby/backward -I/usr/include/ruby-3.0.0 -I. -I../../include -I../../dependencies/stb -I../../dependencies/utf8proc -I../../dependencies/SDL_sound -I../../dependencies/mojoAL/AL  -I/usr/include/SDL2 -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -ffile-prefix-map=/build/ruby3.0-ohOwi0/ruby3.0-3.0.2=. -fstack-protector-strong -Wformat -Werror=format-security -fPIC -DGOSU_DEPRECATED= -DNDEBUG  -D_REENTRANT conftest.c  -L. -L/usr/lib/x86_64-linux-gnu -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic       -lGL -lSDL2 -lruby-3.0 -lvorbisfile -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+| pkg-config --cflags-only-I vorbisfile
+=> "\n"
+| pkg-config --cflags-only-other vorbisfile
+=> "\n"
+| pkg-config --libs-only-l vorbisfile
+=> "-lvorbisfile\n"
+package configuration for vorbisfile
+incflags: 
+cflags: 
+ldflags: 
+libs: -lvorbisfile
+
+"pkg-config --exists sndfile"
+| pkg-config --libs sndfile
+=> "-lsndfile\n"
+"x86_64-linux-gnu-gcc -o conftest -I/usr/include/x86_64-linux-gnu/ruby-3.0.0 -I/usr/include/ruby-3.0.0/ruby/backward -I/usr/include/ruby-3.0.0 -I. -I../../include -I../../dependencies/stb -I../../dependencies/utf8proc -I../../dependencies/SDL_sound -I../../dependencies/mojoAL/AL  -I/usr/include/SDL2  -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -ffile-prefix-map=/build/ruby3.0-ohOwi0/ruby3.0-3.0.2=. -fstack-protector-strong -Wformat -Werror=format-security -fPIC -DGOSU_DEPRECATED= -DNDEBUG  -D_REENTRANT  conftest.c  -L. -L/usr/lib/x86_64-linux-gnu -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic        -lGL -lSDL2 -lvorbisfile -lruby-3.0 -lsndfile -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+| pkg-config --cflags-only-I sndfile
+=> "-I/usr/include/opus\n"
+| pkg-config --cflags-only-other sndfile
+=> "\n"
+| pkg-config --libs-only-l sndfile
+=> "-lsndfile\n"
+package configuration for sndfile
+incflags: -I/usr/include/opus
+cflags: 
+ldflags: 
+libs: -lsndfile
+
+"pkg-config --exists libmpg123"
+| pkg-config --libs libmpg123
+=> "-lmpg123\n"
+"x86_64-linux-gnu-gcc -o conftest -I/usr/include/x86_64-linux-gnu/ruby-3.0.0 -I/usr/include/ruby-3.0.0/ruby/backward -I/usr/include/ruby-3.0.0 -I. -I../../include -I../../dependencies/stb -I../../dependencies/utf8proc -I../../dependencies/SDL_sound -I../../dependencies/mojoAL/AL  -I/usr/include/SDL2  -I/usr/include/opus -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -ffile-prefix-map=/build/ruby3.0-ohOwi0/ruby3.0-3.0.2=. -fstack-protector-strong -Wformat -Werror=format-security -fPIC -DGOSU_DEPRECATED= -DNDEBUG  -D_REENTRANT   conftest.c  -L. -L/usr/lib/x86_64-linux-gnu -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic         -lGL -lSDL2 -lvorbisfile -lsndfile -lruby-3.0 -lmpg123 -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+| pkg-config --cflags-only-I libmpg123
+=> "\n"
+| pkg-config --cflags-only-other libmpg123
+=> "\n"
+| pkg-config --libs-only-l libmpg123
+=> "-lmpg123\n"
+package configuration for libmpg123
+incflags: 
+cflags: 
+ldflags: 
+libs: -lmpg123
+
+"pkg-config --exists fontconfig"
+| pkg-config --libs fontconfig
+=> "-lfontconfig -lfreetype\n"
+"x86_64-linux-gnu-gcc -o conftest -I/usr/include/x86_64-linux-gnu/ruby-3.0.0 -I/usr/include/ruby-3.0.0/ruby/backward -I/usr/include/ruby-3.0.0 -I. -I../../include -I../../dependencies/stb -I../../dependencies/utf8proc -I../../dependencies/SDL_sound -I../../dependencies/mojoAL/AL  -I/usr/include/SDL2  -I/usr/include/opus  -Wdate-time -D_FORTIFY_SOURCE=2   -g -O2 -ffile-prefix-map=/build/ruby3.0-ohOwi0/ruby3.0-3.0.2=. -fstack-protector-strong -Wformat -Werror=format-security -fPIC -DGOSU_DEPRECATED= -DNDEBUG  -D_REENTRANT    conftest.c  -L. -L/usr/lib/x86_64-linux-gnu -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector-strong -rdynamic -Wl,-export-dynamic          -lGL -lSDL2 -lvorbisfile -lsndfile -lmpg123 -lruby-3.0 -lfontconfig -lfreetype -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+| pkg-config --cflags-only-I fontconfig
+=> "-I/usr/include/uuid -I/usr/include/freetype2 -I/usr/include/libpng16\n"
+| pkg-config --cflags-only-other fontconfig
+=> "\n"
+| pkg-config --libs-only-l fontconfig
+=> "-lfontconfig -lfreetype\n"
+package configuration for fontconfig
+incflags: -I/usr/include/uuid -I/usr/include/freetype2 -I/usr/include/libpng16
+cflags: 
+ldflags: 
+libs: -lfontconfig -lfreetype
+

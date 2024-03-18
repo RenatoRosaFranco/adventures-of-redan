@@ -1,0 +1,214 @@
+current directory: /home/renatofranco/tictactoe-rb/vendor/bundle/ruby/3.0.0/gems/gosu-1.4.6/ext/gosu
+/usr/bin/ruby3.0 -I /usr/lib/ruby/vendor_ruby -r ./siteconf20240317-33395-19bmad.rb extconf.rb
+The Gosu gem requires some libraries to be installed system-wide.
+See the following site for a list:
+https://github.com/gosu/gosu/wiki/Getting-Started-on-Linux
+creating Makefile
+
+current directory: /home/renatofranco/tictactoe-rb/vendor/bundle/ruby/3.0.0/gems/gosu-1.4.6/ext/gosu
+make DESTDIR\= clean
+
+current directory: /home/renatofranco/tictactoe-rb/vendor/bundle/ruby/3.0.0/gems/gosu-1.4.6/ext/gosu
+make DESTDIR\=
+compiling ../../src/Audio.cpp
+compiling ../../src/AudioFileAudioToolbox.cpp
+compiling ../../src/AudioFileSDLSound.cpp
+compiling ../../src/AudioImpl.cpp
+compiling ../../src/Bitmap.cpp
+compiling ../../src/BitmapIO.cpp
+compiling ../../src/BlockAllocator.cpp
+compiling ../../src/Channel.cpp
+compiling ../../src/Color.cpp
+compiling ../../src/DirectoriesApple.cpp
+compiling ../../src/DirectoriesUnix.cpp
+compiling ../../src/DirectoriesWin.cpp
+compiling ../../src/FileUnix.cpp
+../../src/FileUnix.cpp: In member function ‘virtual void Gosu::File::resize(size_t)’:
+../../src/FileUnix.cpp:76:14: warning: ignoring return value of ‘int ftruncate(int, __off_t)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   76 |     ftruncate(pimpl->fd, new_size);
+      |     ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+../../src/FileUnix.cpp: In member function ‘virtual void Gosu::File::read(size_t, size_t, void*) const’:
+../../src/FileUnix.cpp:88:15: warning: ignoring return value of ‘ssize_t read(int, void*, size_t)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   88 |         ::read(pimpl->fd, dest_buffer, length);
+      |         ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../src/FileUnix.cpp: In member function ‘virtual void Gosu::File::write(size_t, size_t, const void*)’:
+../../src/FileUnix.cpp:96:12: warning: ignoring return value of ‘ssize_t write(int, const void*, size_t)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   96 |     ::write(pimpl->fd, source_buffer, length);
+      |     ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compiling ../../src/FileWin.cpp
+compiling ../../src/Font.cpp
+compiling ../../src/GosuGLView.cpp
+compiling ../../src/GosuViewController.cpp
+compiling ../../src/Graphics.cpp
+compiling ../../src/IO.cpp
+compiling ../../src/Image.cpp
+compiling ../../src/Input.cpp
+compiling ../../src/InputUIKit.cpp
+compiling ../../src/Inspection.cpp
+compiling ../../src/LargeImageData.cpp
+compiling ../../src/Macro.cpp
+compiling ../../src/MarkupParser.cpp
+compiling ../../src/Math.cpp
+compiling ../../src/OffScreenTarget.cpp
+compiling ../../src/Resolution.cpp
+compiling ../../src/RubyGosu.cxx
+In file included from /usr/include/ruby-3.0.0/ruby.h:38,
+                 from ../../src/RubyGosu.cxx:873:
+../../src/RubyGosu.cxx: In function ‘Gosu::Image* Gosu::render(int, int, VALUE)’:
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2477:26: note: in expansion of macro ‘rb_funcall’
+ 2477 |             VALUE keys = rb_funcall(options, rb_intern("keys"), 0, NULL);
+      |                          ^~~~~~~~~~
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2478:37: note: in expansion of macro ‘rb_funcall’
+ 2478 |             int keys_size = NUM2INT(rb_funcall(keys, rb_intern("size"), 0, NULL));
+      |                                     ^~~~~~~~~~
+../../src/RubyGosu.cxx: In function ‘int SWIG_AsCharPtrAndSize(VALUE, char**, size_t*, int*)’:
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2753:11: note: in expansion of macro ‘rb_funcall’
+ 2753 |     obj = rb_funcall(obj, rb_intern("to_s"), 0, NULL);
+      |           ^~~~~~~~~~
+../../src/RubyGosu.cxx: In function ‘Gosu::Font* new_Gosu_Font__SWIG_1(int, VALUE)’:
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2874:26: note: in expansion of macro ‘rb_funcall’
+ 2874 |             VALUE keys = rb_funcall(options, rb_intern("keys"), 0, NULL);
+      |                          ^~~~~~~~~~
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2875:37: note: in expansion of macro ‘rb_funcall’
+ 2875 |             int keys_size = NUM2INT(rb_funcall(keys, rb_intern("size"), 0, NULL));
+      |                                     ^~~~~~~~~~
+../../src/RubyGosu.cxx: In function ‘Gosu::Image* new_Gosu_Image(VALUE, VALUE)’:
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2937:26: note: in expansion of macro ‘rb_funcall’
+ 2937 |             VALUE keys = rb_funcall(options, rb_intern("keys"), 0, NULL);
+      |                          ^~~~~~~~~~
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2938:37: note: in expansion of macro ‘rb_funcall’
+ 2938 |             int keys_size = NUM2INT(rb_funcall(keys, rb_intern("size"), 0, NULL));
+      |                                     ^~~~~~~~~~
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2954:45: note: in expansion of macro ‘rb_funcall’
+ 2954 |                     int rect_size = NUM2INT(rb_funcall(value, rb_intern("size"), 0, NULL));
+      |                                             ^~~~~~~~~~
+../../src/RubyGosu.cxx: In function ‘Gosu::Image* Gosu_Image_from_text(const string&, double, VALUE)’:
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:2999:26: note: in expansion of macro ‘rb_funcall’
+ 2999 |             VALUE keys = rb_funcall(options, rb_intern("keys"), 0, NULL);
+      |                          ^~~~~~~~~~
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:3000:37: note: in expansion of macro ‘rb_funcall’
+ 3000 |             int keys_size = NUM2INT(rb_funcall(keys, rb_intern("size"), 0, NULL));
+      |                                     ^~~~~~~~~~
+../../src/RubyGosu.cxx: In function ‘Gosu::Image* Gosu_Image_from_markup(const string&, double, VALUE)’:
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:3073:26: note: in expansion of macro ‘rb_funcall’
+ 3073 |             VALUE keys = rb_funcall(options, rb_intern("keys"), 0, NULL);
+      |                          ^~~~~~~~~~
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:3074:37: note: in expansion of macro ‘rb_funcall’
+ 3074 |             int keys_size = NUM2INT(rb_funcall(keys, rb_intern("size"), 0, NULL));
+      |                                     ^~~~~~~~~~
+../../src/RubyGosu.cxx: In function ‘std::vector<Gosu::Image> Gosu_Image_load_tiles__SWIG_0(VALUE, int, int, VALUE)’:
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:3145:26: note: in expansion of macro ‘rb_funcall’
+ 3145 |             VALUE keys = rb_funcall(options, rb_intern("keys"), 0, NULL);
+      |                          ^~~~~~~~~~
+/usr/include/ruby-3.0.0/ruby/ruby.h:134:53: warning: converting to non-pointer type ‘VALUE’ {aka ‘long unsigned int’} from NULL [-Wconversion-null]
+  134 |         const VALUE rb_funcall_args[] = {__VA_ARGS__}; \
+      |                                                     ^
+../../src/RubyGosu.cxx:3146:37: note: in expansion of macro ‘rb_funcall’
+ 3146 |             int keys_size = NUM2INT(rb_funcall(keys, rb_intern("size"), 0, NULL));
+      |                                     ^~~~~~~~~~
+compiling ../../src/SDL_sound.c
+compiling ../../src/SDL_sound_aiff.c
+compiling ../../src/SDL_sound_au.c
+compiling ../../src/SDL_sound_coreaudio.c
+compiling ../../src/SDL_sound_flac.c
+compiling ../../src/SDL_sound_modplug.c
+compiling ../../src/SDL_sound_mp3.c
+compiling ../../src/SDL_sound_raw.c
+compiling ../../src/SDL_sound_shn.c
+compiling ../../src/SDL_sound_voc.c
+compiling ../../src/SDL_sound_vorbis.c
+compiling ../../src/SDL_sound_wav.c
+compiling ../../src/TexChunk.cpp
+compiling ../../src/Text.cpp
+compiling ../../src/TextBuilder.cpp
+compiling ../../src/TextInput.cpp
+compiling ../../src/Texture.cpp
+compiling ../../src/TimingApple.cpp
+compiling ../../src/TimingUnix.cpp
+compiling ../../src/TimingWin.cpp
+compiling ../../src/Transform.cpp
+compiling ../../src/TrueTypeFont.cpp
+compiling ../../src/TrueTypeFontApple.cpp
+compiling ../../src/TrueTypeFontUnix.cpp
+compiling ../../src/TrueTypeFontWin.cpp
+compiling ../../src/Utility.cpp
+compiling ../../src/Version.cpp
+compiling ../../src/WinUtility.cpp
+compiling ../../src/Window.cpp
+compiling ../../src/WindowUIKit.cpp
+compiling ../../src/fastmix.c
+compiling ../../src/load_669.c
+compiling ../../src/load_amf.c
+compiling ../../src/load_ams.c
+compiling ../../src/load_dbm.c
+compiling ../../src/load_dmf.c
+compiling ../../src/load_dsm.c
+compiling ../../src/load_far.c
+compiling ../../src/load_gdm.c
+compiling ../../src/load_it.c
+compiling ../../src/load_mdl.c
+compiling ../../src/load_med.c
+compiling ../../src/load_mod.c
+compiling ../../src/load_mt2.c
+compiling ../../src/load_mtm.c
+compiling ../../src/load_okt.c
+compiling ../../src/load_psm.c
+compiling ../../src/load_ptm.c
+compiling ../../src/load_s3m.c
+compiling ../../src/load_stm.c
+compiling ../../src/load_ult.c
+compiling ../../src/load_umx.c
+compiling ../../src/load_xm.c
+compiling ../../src/mmcmp.c
+compiling ../../src/modplug.c
+compiling ../../src/mojoal.c
+compiling ../../src/snd_dsp.c
+compiling ../../src/snd_flt.c
+compiling ../../src/snd_fx.c
+compiling ../../src/sndfile.c
+compiling ../../src/sndmix.c
+compiling ../../src/utf8proc.c
+linking shared-object gosu.so
+
+current directory: /home/renatofranco/tictactoe-rb/vendor/bundle/ruby/3.0.0/gems/gosu-1.4.6/ext/gosu
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 gosu.so ./.gem.20240317-33395-9kbf0m
