@@ -5,6 +5,7 @@ require 'gosu'
 require_relative 'helpers/game_helper'
 
 # Lib
+require_relative 'lib/explosion'
 require_relative 'lib/boss'
 require_relative 'lib/enemy'
 require_relative 'lib/player'
@@ -33,6 +34,7 @@ class GameWindow < Gosu::Window
     @boss = nil
     @boss_spawn_threshold = 500
     @selected_option = :new_game
+    @explosions = []
     @explosion_sound = Gosu::Sample.new("assets/sounds/effects/explosion.mp3")
     @background_music = Gosu::Song.new("assets/sounds/midis/title.mp3")
     @background_music.play(true)
@@ -52,6 +54,7 @@ class GameWindow < Gosu::Window
 
     handle_enemies
     handle_collisions
+    handle_explosions
   end
 
   def handle_player_movement
@@ -71,10 +74,16 @@ class GameWindow < Gosu::Window
     @projectiles.reject! { |projectile| projectile.y < 0 }
   end
 
+  def handle_explosions
+    @explosions.each(&:update)
+    @explosions.reject!(&:done?)
+  end
+
   def handle_collisions
     @projectiles.dup.each do |projectile|
       @enemies.dup.each do |enemy|
         if check_collision?(projectile, enemy)
+          create_explosion_at(enemy.x, enemy.y) 
           @projectiles.delete(projectile)
           @enemies.delete(enemy)
           @score += 10
@@ -83,6 +92,7 @@ class GameWindow < Gosu::Window
       end
 
       if @boss && check_collision?(projectile, @boss)
+        create_explosion_at(projectile.x, projectile.y) 
         @projectiles.delete(projectile)
         @boss.take_damage(10)
         @explosion_sound.play
@@ -93,6 +103,7 @@ class GameWindow < Gosu::Window
       if check_collision?(@player, enemy)
         @player.take_damage(10)
         @enemies.delete(enemy)
+        create_explosion_at(enemy.x, enemy.y) 
         @explosion_sound.play
       end
     end
@@ -110,12 +121,21 @@ class GameWindow < Gosu::Window
   end
 
   def draw_playing_screen
+    @explosions.each(&:draw)
+  end
+
+  def create_explosion_at(x, y)
+    @explosions.push(Explosion.new(self, x, y))
+  end
+
+  def draw_playing_screen
     if @paused
       draw_paused_screen
     else
       @player.draw
       @enemies.each(&:draw)
       @projectiles.each(&:draw)
+      @explosions.each(&:draw)
       @font.draw_text("HP: #{@player.hp}", 10, self.height - 30, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
   
       if @boss
@@ -232,7 +252,7 @@ class GameWindow < Gosu::Window
       elsif @enemy_spawn_timer <= 0
         spawn_enemy
       end
-    end
+    end 
   end
   
   def reset_for_normal_enemy_spawn
