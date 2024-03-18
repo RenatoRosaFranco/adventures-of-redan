@@ -7,10 +7,14 @@ class GameWindow < Gosu::Window
     self.caption = "Game Title"
     @player = Player.new(self)
     @enemies = []
+    @projectiles = []
     @enemy_spawn_timer = 0
+    @paused = false
   end
 
   def update
+    return if @paused
+  
     if Gosu.button_down?(Gosu::KB_LEFT) || 
       Gosu.button_down?(Gosu::GP_LEFT)
       @player.move_left
@@ -39,11 +43,38 @@ class GameWindow < Gosu::Window
   
     @enemies.each(&:move_down)
     @enemies.reject! { |enemy| enemy.y > self.height }
+
+    @projectiles.each(&:move)
+    @projectiles.reject!{ |projectile| projectile.y < 0 }
   end
 
   def draw
-    @player.draw
-    @enemies.each(&:draw)
+    if @paused
+      draw_paused_screen
+    else
+      @player.draw
+      @enemies.each(&:draw)
+      @projectiles.each(&:draw)
+    end
+  end
+
+  def button_down(id)
+    case id
+    when Gosu::KB_SPACE
+      unless @paused
+        projectile_width = 10
+        @projectiles.push(Projectile.new(self, @player.x + @player.width / 2 - projectile_width / 2, @player.y))
+      end
+    when Gosu::KB_ESCAPE
+      @paused = !@paused
+    end
+  end
+
+  private
+
+  def draw_paused_screen
+    @font ||= Gosu::Font.new(20)
+    @font.draw_text("Paused", 320, 240, 0) 
   end
 end
 
@@ -52,7 +83,7 @@ class Enemy < Object
   attr_reader :x, :y
 
   def initialize(window)
-    @image = Gosu::Image.new("enemy.png")
+    @image = Gosu::Image.new("sprites/enemy.png")
     @x = rand(window.width - @image.width)
     @y = -@image.height
     @speed = rand(5..10)
@@ -67,6 +98,26 @@ class Enemy < Object
   end
 end
 
+# Projectile
+class Projectile < Object
+  attr_reader :x, :y
+
+  def initialize(window, start_x, start_y)
+    @image = Gosu::Image.new('sprites/projectile.png')
+    @x = start_x
+    @y = start_y
+    @speed = -10
+  end
+
+  def move
+    @y += @speed
+  end
+
+  def draw
+    @image.draw(@x, @y, 1)
+  end
+end
+
 # Player Class
 class Player < Object
   attr_reader :x, :y
@@ -74,7 +125,7 @@ class Player < Object
 
   def initialize(window)
     @window = window
-    @image = Gosu::Image.new("player.png")
+    @image = Gosu::Image.new("sprites/player.png")
     @x = @window.width / 2 - @image.width / 2
     @y = @window.height - @image.height - 100
     @speed = 5
@@ -82,6 +133,14 @@ class Player < Object
 
   def draw
     @image.draw(@x, @y, 1)
+  end
+
+  def width
+    @image.width
+  end
+
+  def height
+    @image.height
   end
 
   def move_left
