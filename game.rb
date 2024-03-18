@@ -31,6 +31,9 @@ class GameWindow < Gosu::Window
     @score = 480
     @boss = nil
     @boss_spawn_threshold = 500
+    @explosion_sound = Gosu::Sample.new("assets/sounds/effects/explosion.mp3")
+    @background_music = Gosu::Song.new("assets/sounds/midis/title.mp3")
+    @background_music.play(true)
   end
 
   def update
@@ -73,12 +76,14 @@ class GameWindow < Gosu::Window
           @projectiles.delete(projectile)
           @enemies.delete(enemy)
           @score += 10
+          @explosion_sound.play
         end
       end
 
       if @boss && check_collision?(projectile, @boss)
         @projectiles.delete(projectile)
         @boss.take_damage(10)
+        @explosion_sound.play
       end
     end
     
@@ -86,6 +91,7 @@ class GameWindow < Gosu::Window
       if check_collision?(@player, enemy)
         @player.take_damage(10)
         @enemies.delete(enemy)
+        @explosion_sound.play
       end
     end
   end
