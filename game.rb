@@ -32,6 +32,7 @@ class GameWindow < Gosu::Window
     @survived_waves = 0
     @boss = nil
     @boss_spawn_threshold = 500
+    @selected_option = :new_game
     @explosion_sound = Gosu::Sample.new("assets/sounds/effects/explosion.mp3")
     @background_music = Gosu::Song.new("assets/sounds/midis/title.mp3")
     @background_music.play(true)
@@ -134,9 +135,16 @@ class GameWindow < Gosu::Window
   end
 
   def draw_title_screen
+    new_game_color = @selected_option == :new_game ? Gosu::Color::YELLOW : Gosu::Color::WHITE
+    quit_color = @selected_option == :quit ? Gosu::Color::YELLOW : Gosu::Color::WHITE
+  
     @font.draw_text("Adventures of Redan", 200, 150, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
-    @font.draw_text("Press 'Enter' to Start", 220, 300, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
-    @font.draw_text("Press 'Esc' to Quit", 220, 350, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
+    @font.draw_text("New Game", 280, 250, ZOrder::UI, 1.0, 1.0, new_game_color)
+    @font.draw_text("Quit", 280, 300, ZOrder::UI, 1.0, 1.0, quit_color)
+
+    indicator_x = 250
+    indicator_y = @selected_option == :new_game ? 250 : 300
+    @font.draw_text(">", indicator_x, indicator_y, ZOrder::UI, 1.0, 1.0, Gosu::Color::YELLOW)
   end
 
   def start_new_game
@@ -173,13 +181,14 @@ class GameWindow < Gosu::Window
   def button_down(id)
     case @state
     when :title
-      if id == Gosu::KB_DOWN
-        # Logic to highlight "Quit" (this part will require additional implementation for highlighting)
-      elsif id == Gosu::KB_UP
-        # Logic to highlight "New Game" (similarly, this requires additional logic for highlighting)
-      elsif id == Gosu::KB_RETURN || id == Gosu::KB_ENTER
-        start_new_game
-      elsif id == Gosu::KB_ESCAPE
+      case id
+      when Gosu::KB_DOWN
+        @selected_option = (@selected_option == :new_game) ? :quit : :new_game
+      when Gosu::KB_UP
+        @selected_option = (@selected_option == :quit) ? :new_game : :quit
+      when Gosu::KB_RETURN, Gosu::KB_ENTER
+        @selected_option == :new_game ? start_new_game : close
+      when Gosu::KB_ESCAPE
         close
       end
     when :playing
