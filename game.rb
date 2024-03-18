@@ -30,65 +30,43 @@ class GameWindow < Gosu::Window
     @state = :playing
     @score = 480
     @boss = nil
+    @boss_spawn_threshold = 500
   end
 
   def update
     return if paused? || game_over?
-  
-    if Gosu.button_down?(Gosu::KB_LEFT) || 
-      Gosu.button_down?(Gosu::GP_LEFT)
-      @player.move_left
-    end
-    
-    if Gosu.button_down?(Gosu::KB_RIGHT) || 
-      Gosu.button_down?(Gosu::GP_RIGHT)
-      @player.move_right
-    end
-    
-    if Gosu.button_down?(Gosu::KB_UP) || 
-      Gosu.button_down?(Gosu::GP_UP)
-      @player.move_up
-    end
-    
-    if Gosu.button_down?(Gosu::KB_DOWN) || 
-      Gosu.button_down?(Gosu::GP_DOWN)
-      @player.move_down
-    end
+
+    handle_player_movement
+    handle_projectile_movement
 
     if @player.hp <= 0
       @state = :game_over
     end
 
-    @enemy_spawn_timer -= 1
+    spawn_enemies_or_boss
 
-    if @enemy_spawn_timer <= 0 && !@boss
-      @enemies.push(Enemy.new(self))
-      @enemy_spawn_timer = rand(60..120)
-    end
-  
+    handle_enemies
+    handle_collisions
+  end
+
+  def handle_player_movement
+    @player.move_left if Gosu.button_down?(Gosu::KB_LEFT) || Gosu.button_down?(Gosu::GP_LEFT)
+    @player.move_right if Gosu.button_down?(Gosu::KB_RIGHT) || Gosu.button_down?(Gosu::GP_RIGHT)
+    @player.move_up if Gosu.button_down?(Gosu::KB_UP) || Gosu.button_down?(Gosu::GP_UP)
+    @player.move_down if Gosu.button_down?(Gosu::KB_DOWN) || Gosu.button_down?(Gosu::GP_DOWN)
+  end
+
+  def handle_enemies
     @enemies.each(&:move_down)
-    @enemies.reject! { |enemy| enemy.y > self.height }
+    @enemies.reject! { |enemy| enemy.y > self.height } 
+  end
 
+  def handle_projectile_movement
     @projectiles.each(&:move)
-    @projectiles.reject!{ |projectile| projectile.y < 0 }
+    @projectiles.reject! { |projectile| projectile.y < 0 }
+  end
 
-    # Boss Logic
-    if @boss
-      @boss.update
-      check_boss_projectile_collisions
-
-      if @boss.defeated
-        @enemies = []
-        @boss = nil
-        @enemy_spawn_timer = rand(60..120)
-      end
-    elsif @score >= 500 && !@boss
-      @boss = Boss.new(self)
-      @enemies.clear
-      @enemy_spawn_timer = Float::INFINITY
-    end
-
-    # Check projectile collision
+  def handle_collisions
     @projectiles.dup.each do |projectile|
       @enemies.dup.each do |enemy|
         if check_collision?(projectile, enemy)
@@ -104,7 +82,6 @@ class GameWindow < Gosu::Window
       end
     end
     
-    # Check enemy collision
     @enemies.dup.each do |enemy|
       if check_collision?(@player, enemy)
         @player.take_damage(10)
@@ -180,6 +157,41 @@ class GameWindow < Gosu::Window
   end
 
   private
+
+  def spawn_enemies_or_boss
+    if @boss
+      @boss.update
+      check_boss_projectile_collisions
+  
+      if @boss.defeated
+        reset_for_normal_enemy_spawn
+      end
+    else
+      @enemy_spawn_timer -= 1
+
+      if @score >= @boss_spawn_threshold && @boss.nil?
+        spawn_boss
+      elsif @enemy_spawn_timer <= 0
+        spawn_enemy
+      end
+    end
+  end
+  
+  def reset_for_normal_enemy_spawn
+    @boss = nil
+    @boss_spawn_threshold = ((@score / 500) + 1) * 500
+    @enemy_spawn_timer = rand(60..120)
+  end
+
+  def spawn_boss
+    @boss = Boss.new(self)
+    @enemy_spawn_timer = Float::INFINITY
+  end
+
+  def spawn_enemy
+    @enemies.push(Enemy.new(self))
+    @enemy_spawn_timer = rand(60..120)
+  end
 
   def paused?
     @paused == true

@@ -9,7 +9,8 @@ class Player < Object
     @image = Gosu::Image.new("assets/sprites/player.png")
     @x = @window.width / 2 - @image.width / 2
     @y = @window.height - @image.height - 100
-    @speed = 5
+    @speed = 4
+    @boosted_speed = 8
     @hp = 100
   end
 
@@ -30,18 +31,26 @@ class Player < Object
   end
 
   def move_left
-    @x = [@x - @speed, 0].max
+    base_speed = boost? ? @boosted_speed : @speed
+    @x = [@x - base_speed, 0].max
   end
 
   def move_right
-    @x = [@x + @speed, @window.width - @image.width].min
+    base_speed = boost? ? @boosted_speed : @speed
+    @x = [@x + base_speed, @window.width - @image.width].min
   end
 
   def move_up
-    @y = [@y - @speed, 0].max
+    base_speed = boost? ? @boosted_speed : @speed
+    @y = [@y - base_speed, 0].max
   end
 
   def move_down
-    @y = [@y + @speed, @window.height - @image.height].min
+    base_speed = boost? ? @boosted_speed : @speed
+    @y = [@y + base_speed, @window.height - @image.height].min
+  end
+
+  def boost?
+    @window.button_down?(Gosu::KB_LEFT_SHIFT) || @window.button_down?(Gosu::KB_RIGHT_SHIFT)
   end
 end

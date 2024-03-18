@@ -8,7 +8,7 @@ class Boss < Enemy
   attr_accessor :defeated, :projectiles
 
   def initialize(window)
-    super(window, window.width / 2, 0, "assets/sprites/enemy.png")
+    super(window, window.width / 2, 0, "assets/sprites/boss.png")
     @window = window
     @hp = 300
     @initial_hp = hp
