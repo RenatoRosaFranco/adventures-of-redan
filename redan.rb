@@ -10,6 +10,7 @@ class GameWindow < Gosu::Window
     @projectiles = []
     @enemy_spawn_timer = 0
     @paused = false
+    @font = Gosu::Font.new(20)
   end
 
   def update
@@ -55,6 +56,7 @@ class GameWindow < Gosu::Window
       @player.draw
       @enemies.each(&:draw)
       @projectiles.each(&:draw)
+      @font.draw_text("HP: #{@player.hp}", 10, self.height - 30, 0, 1.0, 1.0, Gosu::Color::WHITE)
     end
   end
 
@@ -121,7 +123,7 @@ end
 # Player Class
 class Player < Object
   attr_reader :x, :y
-  attr_accessor :speed
+  attr_accessor :speed, :hp
 
   def initialize(window)
     @window = window
@@ -129,6 +131,7 @@ class Player < Object
     @x = @window.width / 2 - @image.width / 2
     @y = @window.height - @image.height - 100
     @speed = 5
+    @hp = 100
   end
 
   def draw
