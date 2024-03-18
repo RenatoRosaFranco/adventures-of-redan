@@ -66,7 +66,18 @@ class GameWindow < Gosu::Window
     @projectiles.each(&:move)
     @projectiles.reject!{ |projectile| projectile.y < 0 }
 
-    @enemies.each do |enemy|
+    # Check projectile collision
+    @projectiles.dup.each do |projectile|
+      @enemies.dup.each do |enemy|
+        if check_collision?(projectile, enemy)
+          @projectiles.delete(projectile)
+          @enemies.delete(enemy)
+        end
+      end
+    end
+    
+    # Check enemy collision
+    @enemies.dup.each do |enemy|
       if check_collision?(@player, enemy)
         @player.take_damage(10)
         @enemies.delete(enemy)
@@ -88,7 +99,7 @@ class GameWindow < Gosu::Window
   end
 
   def draw_game_over_screen
-    message = "Game Over\nPress R to Restar or Q to Quit"
+    message = "Game Over\nPress (R) to Restart or (Q) to Quit"
     @font.draw_text(message, 320, 240, ZOrder::UI, 1.0, 1.0, Gosu::Color::YELLOW)
   end
 

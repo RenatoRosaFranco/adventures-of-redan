@@ -14,6 +14,14 @@ class Projectile < Object
     @y += @speed
   end
 
+  def width
+    @image.width
+  end
+
+  def height
+    @image.height
+  end
+
   def draw
     @image.draw(@x, @y, 1)
   end
