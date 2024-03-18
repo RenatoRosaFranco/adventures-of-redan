@@ -1,4 +1,4 @@
-# GEM
+# Gem
 require 'gosu'
 
 # Helpers
@@ -17,7 +17,7 @@ end
 class GameWindow < Gosu::Window
   def initialize
     super 640, 480
-    self.caption = "Game Title"
+    self.caption = "Redan Adventures"
     @player = Player.new(self)
     @enemies = []
     @projectiles = []
@@ -25,6 +25,7 @@ class GameWindow < Gosu::Window
     @paused = false
     @font = Gosu::Font.new(20)
     @state = :playing
+    @score = 0
   end
 
   def update
@@ -72,6 +73,7 @@ class GameWindow < Gosu::Window
         if check_collision?(projectile, enemy)
           @projectiles.delete(projectile)
           @enemies.delete(enemy)
+          @score += 10
         end
       end
     end
@@ -95,6 +97,10 @@ class GameWindow < Gosu::Window
       @enemies.each(&:draw)
       @projectiles.each(&:draw)
       @font.draw_text("HP: #{@player.hp}", 10, self.height - 30, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
+      
+      score_text = "Score: #{@score}"
+      text_width = @font.text_width(score_text)
+      @font.draw_text(score_text, self.width - text_width - 10, 10, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
     end
   end
 
