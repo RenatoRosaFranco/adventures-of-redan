@@ -4,7 +4,7 @@ class Enemy < Object
   attr_reader :x, :y
 
   def initialize(window)
-    @image = Gosu::Image.new("sprites/enemy.png")
+    @image = Gosu::Image.new("assets/sprites/enemy.png")
     @x = rand(window.width - @image.width)
     @y = -@image.height
     @speed = rand(5..10)

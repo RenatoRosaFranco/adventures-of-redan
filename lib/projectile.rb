@@ -4,7 +4,7 @@ class Projectile < Object
   attr_reader :x, :y
 
   def initialize(window, start_x, start_y)
-    @image = Gosu::Image.new('sprites/projectile.png')
+    @image = Gosu::Image.new('assets/sprites/projectile.png')
     @x = start_x
     @y = start_y
     @speed = -10

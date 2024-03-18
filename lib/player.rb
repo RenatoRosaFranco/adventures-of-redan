@@ -6,7 +6,7 @@ class Player < Object
 
   def initialize(window)
     @window = window
-    @image = Gosu::Image.new("sprites/player.png")
+    @image = Gosu::Image.new("assets/sprites/player.png")
     @x = @window.width / 2 - @image.width / 2
     @y = @window.height - @image.height - 100
     @speed = 5
