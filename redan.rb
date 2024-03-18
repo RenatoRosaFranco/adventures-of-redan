@@ -1,5 +1,13 @@
+# GEM
 require 'gosu'
+
+# Helpers
 require_relative 'helpers/game_helper'
+
+# Lib
+require_relative 'lib/enemy'
+require_relative 'lib/projectile'
+require_relative 'lib/player'
 
 module ZOrder
   BACKGROUND, ENEMIES, PROJECTILES, PLAYER, UI = *0..4
@@ -122,101 +130,6 @@ class GameWindow < Gosu::Window
   def draw_paused_screen
     @font ||= Gosu::Font.new(20)
     @font.draw_text("Paused", 320, 240, 0) 
-  end
-end
-
-# Enemy Class
-class Enemy < Object
-  attr_reader :x, :y
-
-  def initialize(window)
-    @image = Gosu::Image.new("sprites/enemy.png")
-    @x = rand(window.width - @image.width)
-    @y = -@image.height
-    @speed = rand(5..10)
-  end
-
-  def draw
-    @image.draw(@x, @y, 1)
-  end
-
-  def width
-    @image.width
-  end
-
-  def height
-    @image.height
-  end
-
-  def move_down
-    @y += @speed
-  end
-end
-
-# Projectile
-class Projectile < Object
-  attr_reader :x, :y
-
-  def initialize(window, start_x, start_y)
-    @image = Gosu::Image.new('sprites/projectile.png')
-    @x = start_x
-    @y = start_y
-    @speed = -10
-  end
-
-  def move
-    @y += @speed
-  end
-
-  def draw
-    @image.draw(@x, @y, 1)
-  end
-end
-
-# Player Class
-class Player < Object
-  attr_reader :x, :y
-  attr_accessor :speed, :hp
-
-  def initialize(window)
-    @window = window
-    @image = Gosu::Image.new("sprites/player.png")
-    @x = @window.width / 2 - @image.width / 2
-    @y = @window.height - @image.height - 100
-    @speed = 5
-    @hp = 100
-  end
-
-  def take_damage(amount)
-    @hp -= amount
-  end
-
-  def draw
-    @image.draw(@x, @y, 1)
-  end
-
-  def width
-    @image.width
-  end
-
-  def height
-    @image.height
-  end
-
-  def move_left
-    @x = [@x - @speed, 0].max
-  end
-
-  def move_right
-    @x = [@x + @speed, @window.width - @image.width].min
-  end
-
-  def move_up
-    @y = [@y - @speed, 0].max
-  end
-
-  def move_down
-    @y = [@y + @speed, @window.height - @image.height].min
   end
 end
 
