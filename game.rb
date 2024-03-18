@@ -75,6 +75,7 @@ class GameWindow < Gosu::Window
     # Boss Logic
     if @boss
       @boss.update
+      check_boss_projectile_collisions
 
       if @boss.defeated
         @enemies = []
@@ -125,6 +126,7 @@ class GameWindow < Gosu::Window
       
       if @boss
         @boss&.draw
+        @boss.draw_projectiles
         draw_boss_hp
       end
       
@@ -150,6 +152,15 @@ class GameWindow < Gosu::Window
     Gosu.draw_rect(padding, padding, bar_width, bar_height, Gosu::Color::GRAY, ZOrder::UI)
     Gosu.draw_rect(padding, padding, bar_width * hp_ratio, bar_height, Gosu::Color::RED, ZOrder::UI)
     @font.draw_text("Boss HP: #{@boss.hp}", padding, padding - 20, ZOrder::UI, 1.0, 1.0, Gosu::Color::WHITE)
+  end
+
+  def check_boss_projectile_collisions
+    @boss.projectiles.dup.each do |proj|
+      if check_collision?(proj, @player)
+        @player.take_damage(proj.damage)
+        @boss.projectiles.delete(proj)
+      end
+    end
   end
 
   def button_down(id)

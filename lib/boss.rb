@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require_relative 'enemy'
+require_relative 'boss_projectile'
 
 class Boss < Enemy
   attr_reader :hp, :initial_hp
-  attr_accessor :defeated, :score
+  attr_accessor :defeated, :projectiles
 
   def initialize(window)
     super(window, window.width / 2, 0, "assets/sprites/enemy.png")
@@ -17,6 +18,8 @@ class Boss < Enemy
     @move_down_every = 100
     @move_counter = 0
     @defeated = false
+    @projectiles = []
+    @projectile_cooldown = 60
   end
 
   def update
@@ -45,6 +48,16 @@ class Boss < Enemy
 
   def draw
     super
+
+    if @projectile_cooldown <= 0
+      shoot_projectile
+      @projectile_cooldown = 60
+    else
+      @projectile_cooldown -= 1
+    end
+
+    @projectiles.each(&:move)
+    @projectiles.reject!(&:out_of_bounds?)
   end
 
   def take_damage(amount)
@@ -52,6 +65,14 @@ class Boss < Enemy
     if @hp <= 0
       handle_defeat
     end
+  end
+
+  def shoot_projectile
+    @projectiles << BossProjectile.new(@window, @x + @image.width / 2, @y + @image.height)
+  end
+  
+  def draw_projectiles
+    @projectiles.each(&:draw)
   end
 
   private

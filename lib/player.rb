@@ -13,8 +13,8 @@ class Player < Object
     @hp = 100
   end
 
-  def take_damage(amount)
-    @hp -= amount
+  def take_damage(damage_amount)
+    @hp -= damage_amount
   end
 
   def draw
